@@ -20,7 +20,7 @@ services:
     # privileged is only needed for USB radios (Zigbee/Z-Wave sticks). Remove it on a cloud VM.
     privileged: true
     environment:
-      - TZ=Asia/Manila
+      - TZ=Asia/Dubai
     volumes:
       - ./homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -33,8 +33,8 @@ services:
     ports:
       - "5678:5678"
     environment:
-      - GENERIC_TIMEZONE=Asia/Manila
-      - TZ=Asia/Manila
+      - GENERIC_TIMEZONE=Asia/Dubai
+      - TZ=Asia/Dubai
       # Public URL n8n uses to build webhook addresses. Set to your HTTPS address.
       - WEBHOOK_URL=https://n8n.example.com/
       # Generate once with: openssl rand -hex 32   (losing it makes stored credentials unreadable)
