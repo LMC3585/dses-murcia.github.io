@@ -7,7 +7,7 @@ http:
   # Allow the Jarvis web app (served from GitHub Pages) to call the HA API from the browser.
   # Without this the phone gets a CORS error and the app shows "Could not reach Home Assistant".
   cors_allowed_origins:
-    - https://dses-murcia.github.io
+    - https://lmc3585.github.io
   # Only enable the two lines below if HA sits behind a reverse proxy (Nginx, Caddy, Traefik).
   # use_x_forwarded_for: true
   # trusted_proxies:

@@ -5,7 +5,8 @@
 A mobile-first web app, hosted on GitHub Pages at `/jarvis/`, that turns a phone into a voice
 and touch controller for every device in Home Assistant, with Claude as the conversation agent.
 
-- **Try it now:** `https://dses-murcia.github.io/jarvis/` runs in demo mode with sample devices.
+- **Try it now:** `https://lmc3585.github.io/dses-murcia.github.io/jarvis/` runs in demo mode with sample devices.
+  (The repo is owned by the `LMC3585` account, so GitHub serves it as a project site under that account, not at `dses-murcia.github.io`. Rename the repo to `lmc3585.github.io` to get the short address.)
 - **Set it up for real:** follow [docs/SETUP.md](docs/SETUP.md). Everything is doable from a phone.
 - **Hub configs:** [hub/](hub/) has the Docker Compose file, Home Assistant snippets and an n8n workflow.
 

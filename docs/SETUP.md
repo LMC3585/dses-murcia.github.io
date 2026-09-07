@@ -24,7 +24,8 @@ spread over a few days, mostly waiting for hardware to arrive.
 ## Step 0: publish the app (5 minutes)
 
 1. Merge this branch to `main`. GitHub Pages serves the repo automatically.
-2. Open `https://dses-murcia.github.io/jarvis/` on your phone. It starts in **demo mode** with sample
+2. Open `https://lmc3585.github.io/dses-murcia.github.io/jarvis/` on your phone. (GitHub serves this repo
+   as a project site under the `LMC3585` account; `dses-murcia.github.io` itself returns 404.) It starts in **demo mode** with sample
    devices so you can try the interface before owning any hardware.
 3. In Chrome tap the menu, then **Add to Home screen**. On iPhone use Safari's share sheet,
    then **Add to Home Screen**.
@@ -61,7 +62,7 @@ Never port-forward port 8123 on your router. Exposed hubs get scanned within hou
    ```yaml
    http:
      cors_allowed_origins:
-       - https://dses-murcia.github.io
+       - https://lmc3585.github.io
    ```
 
 3. In the Jarvis app open **Settings**, paste the HTTPS URL and token, tap **Test connection**,
