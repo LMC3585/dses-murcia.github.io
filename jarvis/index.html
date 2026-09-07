@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jarvis">
+  <title>Jarvis</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="reactor" aria-hidden="true"><span></span></div>
+    <div class="title">
+      <h1 id="app-name">Jarvis</h1>
+      <div id="status-pill" class="pill pill-demo">Demo mode</div>
+    </div>
+    <button id="btn-refresh" class="icon-btn" title="Refresh" aria-label="Refresh">&#x21bb;</button>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main>
+    <!-- Devices -->
+    <section id="view-devices" class="view">
+      <input id="search" class="search" type="search" placeholder="Search devices" autocomplete="off">
+      <div id="device-list"></div>
+      <p id="devices-empty" class="muted" hidden>No devices yet. Connect Home Assistant in Settings.</p>
+    </section>
+
+    <!-- Chat / voice -->
+    <section id="view-chat" class="view" hidden>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="chat-form" class="chat-form">
+        <input id="chat-input" type="text" placeholder="Ask Jarvis or give a command" autocomplete="off">
+        <button id="btn-mic" type="button" class="mic" aria-label="Speak" title="Hold to speak">&#x1F399;</button>
+        <button type="submit" class="send" aria-label="Send">&#x27A4;</button>
+      </form>
+      <p id="mic-hint" class="muted small" hidden>Voice input is not supported in this browser. Chrome on Android works best.</p>
+    </section>
+
+    <!-- Settings -->
+    <section id="view-settings" class="view" hidden>
+      <form id="settings-form" class="settings">
+        <label>Assistant name
+          <input name="name" type="text" placeholder="Jarvis">
+        </label>
+        <label>Home Assistant URL
+          <input name="url" type="url" placeholder="https://your-home.ui.nabu.casa" inputmode="url">
+          <small>Must be HTTPS. Leave empty to stay in demo mode.</small>
+        </label>
+        <label>Long-lived access token
+          <input name="token" type="password" placeholder="Paste token from your HA profile" autocomplete="off">
+          <small>Stored only in this phone's browser. Create it in Home Assistant: Profile &rarr; Security &rarr; Long-lived access tokens.</small>
+        </label>
+        <label>Conversation agent id (optional)
+          <input name="agentId" type="text" placeholder="e.g. conversation.claude">
+          <small>Leave empty to use the default Assist agent.</small>
+        </label>
+        <label>Language
+          <input name="language" type="text" placeholder="en">
+        </label>
+        <label class="row">
+          <input name="speak" type="checkbox"> Read replies out loud
+        </label>
+        <div class="actions">
+          <button type="button" id="btn-test" class="secondary">Test connection</button>
+          <button type="submit" class="primary">Save</button>
+        </div>
+        <p id="test-result" class="muted small"></p>
+        <details class="help">
+          <summary>Connection checklist</summary>
+          <ol>
+            <li>Home Assistant must be reachable over HTTPS from your phone (Home Assistant Cloud or Tailscale).</li>
+            <li>Add this site to <code>http.cors_allowed_origins</code> in <code>configuration.yaml</code> and restart HA.</li>
+            <li>Install the Anthropic integration in HA and enable it as a voice assistant with "Control Home Assistant" on.</li>
+          </ol>
+        </details>
+        <button type="button" id="btn-reset" class="danger">Forget settings on this phone</button>
+      </form>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Sections">
+    <button data-view="devices" class="active">&#x26A1;<span>Devices</span></button>
+    <button data-view="chat">&#x1F4AC;<span>Jarvis</span></button>
+    <button data-view="settings">&#x2699;<span>Settings</span></button>
+  </nav>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="./app.js"></script>
+</body>
+</html>

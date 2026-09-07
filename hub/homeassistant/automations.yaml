@@ -1,0 +1,41 @@
+# Example automations that keep working even when the internet or the LLM is down.
+# Keep safety-critical behaviour here, not in the AI layer.
+
+- id: jarvis_night_lights_off
+  alias: "Jarvis: lights off at midnight"
+  description: "Turn off every light at 00:00 so a forgotten voice command never leaves them on all night."
+  trigger:
+    - platform: time
+      at: "00:00:00"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: all
+
+- id: jarvis_forward_command_to_n8n
+  alias: "Jarvis: forward command to n8n"
+  description: >
+    Send a webhook to n8n whenever an input_text helper named 'Jarvis command' changes.
+    Create the helper in Settings -> Devices & services -> Helpers -> Text, entity id input_text.jarvis_command.
+    Use this to hand off tasks that are not about devices (calendar, email, reminders).
+  trigger:
+    - platform: state
+      entity_id: input_text.jarvis_command
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state | length > 0 }}"
+  action:
+    - service: rest_command.jarvis_n8n
+      data:
+        text: "{{ trigger.to_state.state }}"
+
+# Add to configuration.yaml to define the rest_command used above:
+#
+# rest_command:
+#   jarvis_n8n:
+#     url: "https://n8n.example.com/webhook/jarvis"
+#     method: POST
+#     headers:
+#       X-Jarvis-Key: !secret n8n_jarvis_key
+#     content_type: "application/json"
+#     payload: '{"text": "{{ text }}"}'
