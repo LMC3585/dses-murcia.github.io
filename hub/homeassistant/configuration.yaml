@@ -1,0 +1,23 @@
+# Minimal Home Assistant configuration for the Jarvis phone app.
+# Merge these keys into your existing configuration.yaml, then restart Home Assistant.
+
+default_config:
+
+http:
+  # Allow the Jarvis web app (served from GitHub Pages) to call the HA API from the browser.
+  # Without this the phone gets a CORS error and the app shows "Could not reach Home Assistant".
+  cors_allowed_origins:
+    - https://dses-murcia.github.io
+  # Only enable the two lines below if HA sits behind a reverse proxy (Nginx, Caddy, Traefik).
+  # use_x_forwarded_for: true
+  # trusted_proxies:
+  #   - 172.16.0.0/12
+
+# Voice assistant wiring is done in the UI, not YAML:
+#   Settings -> Devices & services -> Add integration -> "Anthropic"  (paste API key)
+#   Settings -> Voice assistants -> Add assistant -> conversation agent: Anthropic
+#   In the Anthropic integration options, turn on "Control Home Assistant" so it can act on devices.
+# The app's optional "Conversation agent id" is shown in Settings -> Voice assistants (e.g. conversation.claude).
+
+# Automations: paste the examples from automations.yaml into your own automations.yaml
+# (a fresh install already has `automation: !include automations.yaml`).
